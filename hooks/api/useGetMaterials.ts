@@ -3,9 +3,8 @@ import type { UseQueryOptions } from "@tanstack/react-query";
 import type { AxiosError } from "axios";
 
 import { useAxios } from "@app/hooks";
-import { ListResponseType, MaterialType, ErrorResponseType } from "@api";
 
-export default function useGetRecipes(
+export default function useGetMaterials(
   options?: UseQueryOptions<
     ListResponseType<MaterialType>,
     AxiosError<ErrorResponseType>
@@ -14,10 +13,10 @@ export default function useGetRecipes(
   const axiosInstance = useAxios();
 
   return useQuery({
-    queryKey: ["useGetRecipes"],
+    queryKey: ["useGetMaterials"],
     queryFn: () =>
       axiosInstance
-        .get<ListResponseType<MaterialType>>("api/recipes")
+        .get<ListResponseType<MaterialType>>("/api/materials")
         .then((response) => response.data),
     ...options,
   });

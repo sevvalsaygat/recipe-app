@@ -1,22 +1,22 @@
-export interface MaterialType {
+interface MaterialType {
   name: string;
 }
 
-export interface IRecipeFormType {
+interface IRecipeFormType {
   title: string;
   cookingTime: string;
   cookingMethod: string;
   materials: Array<
     {
-      quantity: string;
+      quantity: number;
     } & MaterialType
   >;
 }
 
-export interface ErrorResponseType {
+interface ErrorResponseType {
   message: string;
 }
 
-export interface ListResponseType<T> {
+interface ListResponseType<T> {
   data: T[];
 }
