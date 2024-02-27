@@ -1,29 +1,38 @@
 import { create } from "zustand";
 import { persist, devtools } from "zustand/middleware";
-
-import { IRecipeFormType } from "@api";
+import { nanoid } from "nanoid";
 
 type UseRecipeStoreType = {
-  recipes: IRecipeFormType[];
-  addRecipe: (recipe: IRecipeFormType) => void;
-  deleteRecipe: (recipe: IRecipeFormType) => void;
+  recipes: RecipeType[];
+  addRecipe: (data: IRecipeFormType) => void;
+  deleteRecipe: (id: string) => void;
+  getById: (id: string) => RecipeType | undefined;
 };
 
-const useRecipeStoreType = create<UseRecipeStoreType>()(
+// @ts-ignore
+const useRecipeStore = create<UseRecipeStoreType>()(
   devtools(
     persist(
       (set) => ({
         recipes: [],
-        addRecipe: (recipe) =>
+        addRecipe: (data) =>
           set((state) => ({
-            recipes: [...state.recipes, recipe],
+            recipes: [
+              ...state.recipes,
+              {
+                ...data,
+                id: nanoid(),
+              },
+            ],
           })),
-        deleteRecipe: (recipe) => {
+        deleteRecipe: (id) =>
           set((state) => ({
-            recipes: state.recipes.filter(
-              (stateRecipe) => stateRecipe.title !== recipe.title
-            ),
-          }));
+            recipes: state.recipes.filter((recipe) => recipe.id !== id),
+          })),
+        getById: (id) => {
+          return useRecipeStore
+            .getState()
+            .recipes.find((recipe: RecipeType) => recipe.id === id);
         },
       }),
       {
@@ -34,4 +43,4 @@ const useRecipeStoreType = create<UseRecipeStoreType>()(
   )
 );
 
-export default useRecipeStoreType;
+export default useRecipeStore;

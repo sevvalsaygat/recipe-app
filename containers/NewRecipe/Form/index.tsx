@@ -74,36 +74,38 @@ const Form: React.FC<FormPropTypes> = () => {
               );
             })}
           </div>
-          <div className="flex flex-row gap-4 ml-5">
-            <div>
-              <FormComponents.Input
-                variant="primary"
-                name="title"
-                label="Recipe Title"
-              />
+          <div className="flex flex-col w-2/3">
+            <div className="flex flex-row gap-4 items-center justify-center">
+              <div>
+                <FormComponents.Input
+                  variant="primary"
+                  name="title"
+                  label="Recipe Title"
+                />
+              </div>
+              <div>
+                <FormComponents.Input
+                  variant="primary"
+                  name="cookingTime"
+                  label="Cooking Time"
+                />
+              </div>
+              <div>
+                <FormComponents.Input
+                  variant="primary"
+                  name="cookingMethod"
+                  label="Cooking Method"
+                />
+              </div>
             </div>
-            <div>
-              <FormComponents.Input
-                variant="primary"
-                name="cookingTime"
-                label="Cooking Time"
-              />
-            </div>
-            <div>
-              <FormComponents.Input
-                variant="primary"
-                name="cookingMethod"
-                label="Cooking Method"
-              />
-            </div>
+            <Button
+              onClick={handleSubmit(onSubmit)}
+              variant="primary"
+              className="w-full"
+              title="save"
+            />
           </div>
         </FormProvider>
-        <Button
-          onClick={handleSubmit(onSubmit)}
-          variant="primary"
-          className="w-full ml-5"
-          title="save"
-        />
       </div>
       <div className="flex flex-row w-1/2 mx-28 mt-16 border">
         <div className="flex flex-col px-20 mt-7">
@@ -113,8 +115,10 @@ const Form: React.FC<FormPropTypes> = () => {
               return <div key={index}>{field.name}</div>;
             })}
           </div>
-          <div>{watchCookingTime}</div>
-          <div>{watchCookingMethod}</div>
+          <div className="flex flex-col mt-10">
+            <div>{watchCookingTime}</div>
+            <div>{watchCookingMethod}</div>
+          </div>
         </div>
       </div>
     </div>

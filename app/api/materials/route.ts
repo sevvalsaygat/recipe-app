@@ -1,7 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 
 import { materials } from "@mock";
-import { ListResponseType, MaterialType, ErrorResponseType } from "@api";
 
 export async function GET(req: NextRequest) {
   try {

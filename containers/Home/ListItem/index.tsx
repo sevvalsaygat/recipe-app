@@ -1,11 +1,19 @@
+"use client";
+
 import React from "react";
 
-type ListItemPropTypes = {};
+import { useRecipeStore } from "@app/stores";
 
-const ListItem: React.FC<ListItemPropTypes> = () => {
+type ListItemPropTypes = {
+  recipe: RecipeType;
+};
+
+const ListItem: React.FC<ListItemPropTypes> = ({ recipe }) => {
+  const deleteRecipe = useRecipeStore((state) => state.deleteRecipe);
+
   return (
     <div>
-      <div>LIST ITEM</div>
+      <div>{recipe.title}</div>
     </div>
   );
 };

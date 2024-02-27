@@ -1,3 +1,15 @@
+interface RecipeType {
+  id: string;
+  title: string;
+  cookingTime: string;
+  cookingMethod: string;
+  materials: Array<
+    {
+      quantity: number;
+    } & MaterialType
+  >;
+}
+
 interface MaterialType {
   name: string;
 }
