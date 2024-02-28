@@ -15,12 +15,12 @@ const List: React.FC<ListPropTypes> = () => {
   }, []);
 
   return (
-    <div className="grid grid-cols-3 px-24 gap-4 mx-24 mt-36">
+    <div className="w-screen grid grid-cols-3 px-24 gap-5 mx-24 mt-28">
       {recipes.map((recipe, i) => {
         return (
           <div
             key={i}
-            className="flex flex-row border h-full w-full rounded-xl mb-5"
+            className="flex flex-row border border-t-8 border-amber-500 hover:bg-orange-100 h-full w-full rounded-xl pl-10 py-3 pr-5"
           >
             <ListItem recipe={recipe} />
           </div>
