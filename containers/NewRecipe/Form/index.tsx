@@ -37,10 +37,10 @@ const Form: React.FC<FormPropTypes> = () => {
     try {
       addRecipe(data);
       reset();
-      ("Başarılı bir şekilde eklendi.");
+      ("Created successfully.");
       router.push("/");
     } catch (error) {
-      ("Bir hata oluştu.");
+      ("Something went wrong.");
     }
   };
 

@@ -16,7 +16,7 @@ const ListItem: React.FC<ListItemPropTypes> = ({ recipe }) => {
       <div>{recipe.title}</div>
       <div>{recipe.cookingTime}</div>
       <div>{recipe.cookingMethod}</div>
-      <div className="">
+      <div>
         {recipe.materials.map((material, i) => {
           return (
             <div key={i}>

@@ -23,7 +23,7 @@ type InputPropTypes = {
   defaultValue?: string;
   variant?: "primary" | "opacity";
   className?: string;
-  type?: "text" | "number";
+  type?: "text";
 };
 
 const Input: React.FC<InputPropTypes> = ({
