@@ -14,6 +14,24 @@ const ListItem: React.FC<ListItemPropTypes> = ({ recipe }) => {
   return (
     <div>
       <div>{recipe.title}</div>
+      <div>{recipe.cookingTime}</div>
+      <div>{recipe.cookingMethod}</div>
+      <div className="">
+        {recipe.materials.map((material, i) => {
+          return (
+            <div key={i}>
+              <div>{material.name}</div>
+            </div>
+          );
+        })}
+      </div>
+      <button
+        onClick={() => {
+          deleteRecipe(recipe.id);
+        }}
+      >
+        Delete
+      </button>
     </div>
   );
 };

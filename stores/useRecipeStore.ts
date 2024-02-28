@@ -9,11 +9,10 @@ type UseRecipeStoreType = {
   getById: (id: string) => RecipeType | undefined;
 };
 
-// @ts-ignore
 const useRecipeStore = create<UseRecipeStoreType>()(
   devtools(
     persist(
-      (set) => ({
+      (set, get) => ({
         recipes: [],
         addRecipe: (data) =>
           set((state) => ({
@@ -30,9 +29,7 @@ const useRecipeStore = create<UseRecipeStoreType>()(
             recipes: state.recipes.filter((recipe) => recipe.id !== id),
           })),
         getById: (id) => {
-          return useRecipeStore
-            .getState()
-            .recipes.find((recipe: RecipeType) => recipe.id === id);
+          return get().recipes.find((recipe: RecipeType) => recipe.id === id);
         },
       }),
       {

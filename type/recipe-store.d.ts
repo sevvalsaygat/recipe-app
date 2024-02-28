@@ -1,4 +1,4 @@
-interface RecipeType {
+type RecipeType = {
   id: string;
   title: string;
   cookingTime: string;
@@ -8,13 +8,13 @@ interface RecipeType {
       quantity: number;
     } & MaterialType
   >;
-}
+};
 
-interface MaterialType {
+type MaterialType = {
   name: string;
-}
+};
 
-interface IRecipeFormType {
+type IRecipeFormType = {
   title: string;
   cookingTime: string;
   cookingMethod: string;
@@ -23,12 +23,12 @@ interface IRecipeFormType {
       quantity: number;
     } & MaterialType
   >;
-}
+};
 
-interface ErrorResponseType {
+type ErrorResponseType = {
   message: string;
-}
+};
 
-interface ListResponseType<T> {
+type ListResponseType<T> = {
   data: T[];
-}
+};
