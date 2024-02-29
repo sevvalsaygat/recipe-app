@@ -6,7 +6,7 @@ import { useRouter } from "next/navigation";
 import { useForm, useFieldArray, FormProvider } from "react-hook-form";
 
 import { api } from "@app/hooks";
-import { Button, Form as FormComponents } from "@app/components";
+import { Button, Form as FormComponents, Icons } from "@app/components";
 import { useRecipeStore } from "@app/stores";
 
 type FormPropTypes = {};
@@ -52,23 +52,22 @@ const Form: React.FC<FormPropTypes> = () => {
     <div className="w-full flex flex-row">
       <div className="flex flex-col items-center w-1/2">
         <FormProvider {...useFormMethods}>
-          <div className="flex flex-col px-11 py-8 border overflow-auto w-3/4 h-72 my-20">
+          <div className="food-bar-bg flex flex-col px-11 py-8 border overflow-auto w-3/4 h-80 my-20">
             {materialsData?.data.map((data, index) => {
               return (
                 <div
-                  className="flex flex-row justify-between cursor-pointer hover:bg-gray-200 pl-3 py-2"
+                  className="flex flex-row text-white font-serif text-base items-center justify-between cursor-pointer bg-gray-800 bg-opacity-25 hover:bg-lime-700 hover:bg-opacity-75 pl-7 py-2"
                   key={index}
                 >
                   <div>{data.name}</div>
-                  <Button
+                  <Icons.Plus
                     onClick={() => {
                       append({
                         name: data.name,
                         quantity: 1,
                       });
                     }}
-                    title="+"
-                    className="px-3 border bg-red-500"
+                    className="w-8 h-8 text-white mr-3 hover:text-gray-800"
                   />
                 </div>
               );
@@ -81,6 +80,7 @@ const Form: React.FC<FormPropTypes> = () => {
                   variant="primary"
                   name="title"
                   label="Recipe Title"
+                  placeholder="(e.g. Spaghetti)"
                 />
               </div>
               <div>
@@ -88,6 +88,7 @@ const Form: React.FC<FormPropTypes> = () => {
                   variant="primary"
                   name="cookingTime"
                   label="Cooking Time"
+                  placeholder="(e.g. 30 minutes)"
                 />
               </div>
               <div>
@@ -95,6 +96,7 @@ const Form: React.FC<FormPropTypes> = () => {
                   variant="primary"
                   name="cookingMethod"
                   label="Cooking Method"
+                  placeholder="(e.g. Boil, Fry)"
                 />
               </div>
             </div>
@@ -102,7 +104,7 @@ const Form: React.FC<FormPropTypes> = () => {
               onClick={handleSubmit(onSubmit)}
               variant="primary"
               className="w-full"
-              title="save"
+              title="Save Recipe"
             />
           </div>
         </FormProvider>

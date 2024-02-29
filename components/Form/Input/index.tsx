@@ -46,7 +46,7 @@ const Input: React.FC<InputPropTypes> = ({
   return (
     <React.Fragment>
       {label && (
-        <label className="block text-sm font-medium leading-6 text-gray-900">
+        <label className="block text-sm font-serif leading-6 text-orange-900">
           {label}
         </label>
       )}
@@ -66,7 +66,7 @@ const Input: React.FC<InputPropTypes> = ({
               type={type}
               placeholder={placeholder}
               className={cn(className, {
-                "w-full mb-4 bg-zinc-200 border border-gray-400 rounded-3 p-3 placeholder:text-sm font-light placeholder:text-zinc-600 focus:outline-none focus:ring-2 focus:ring-gray-350 focus:bg-white text-sm":
+                "w-full mb-4 bg-orange-100 bg-opacity-20 border border-orange-300 rounded-lg p-3 placeholder:text-xs font-light placeholder:text-zinc-500 focus:outline-none focus:ring-2 focus:ring-gray-350 focus:bg-white text-sm":
                   variant === "primary",
               })}
             />
