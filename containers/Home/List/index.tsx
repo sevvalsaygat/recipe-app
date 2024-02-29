@@ -15,7 +15,7 @@ const List: React.FC<ListPropTypes> = () => {
   }, []);
 
   return (
-    <div className="w-screen grid grid-cols-3 px-24 gap-5 mx-24 mt-28">
+    <div className="grid grid-cols-3 px-24 gap-5 mx-24 mt-28 mb-28">
       {recipes.map((recipe, i) => {
         return (
           <div
