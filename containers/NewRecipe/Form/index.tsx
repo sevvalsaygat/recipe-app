@@ -32,8 +32,6 @@ const Form: React.FC<FormPropTypes> = () => {
   const addRecipe = useRecipeStore((state) => state.addRecipe);
 
   const onSubmit = (data: IRecipeFormType) => {
-    console.log("On submit calıstı, formdan gelen data = ", data);
-
     try {
       addRecipe(data);
       reset();
@@ -50,7 +48,7 @@ const Form: React.FC<FormPropTypes> = () => {
 
   return (
     <div className="w-full flex flex-row">
-      <div className="flex flex-col items-center w-1/2">
+      <div className="flex flex-col items-center w-2/3">
         <FormProvider {...useFormMethods}>
           <div className="food-bar-bg flex flex-col px-11 py-8 border overflow-auto w-3/4 h-80 my-20">
             {materialsData?.data.map((data, index) => {
@@ -109,17 +107,33 @@ const Form: React.FC<FormPropTypes> = () => {
           </div>
         </FormProvider>
       </div>
-      <div className="flex flex-row w-1/2 mx-28 mt-16 border">
-        <div className="flex flex-col px-20 mt-7">
-          <div className="mb-10">{watchTitle}</div>
-          <div className="flex flex-col h-52 overflow-x-auto pr-9 ">
-            {fields.map((field, index) => {
-              return <div key={index}>{field.name}</div>;
-            })}
+      <div className="flex flex-row w-1/3 mx-28 mt-16 bg-orange-50 rounded-2xl shadow-lg">
+        <div className="flex flex-col px-20 justify-between">
+          <div className="flex flex-col mt-7">
+            <div className="mb-10 pb-1 text-lg font-mono text-orange-900 underline decoration-double">
+              {watchTitle}
+            </div>
+            <div className="flex flex-col h-72 overflow-x-auto pr-9">
+              {fields.map((field, index) => {
+                return (
+                  <div
+                    className="flex flex-row items-center gap-2 text-sm font-mono text-orange-700"
+                    key={index}
+                  >
+                    <Icons.Cutlery />
+                    {field.name}
+                  </div>
+                );
+              })}
+            </div>
           </div>
-          <div className="flex flex-col mt-10">
-            <div>{watchCookingTime}</div>
-            <div>{watchCookingMethod}</div>
+          <div className="flex flex-col mb-24">
+            <div className="text-sm font-serif text-orange-700 underline">
+              {watchCookingTime}
+            </div>
+            <div className="text-sm font-serif text-orange-700 underline">
+              {watchCookingMethod}
+            </div>
           </div>
         </div>
       </div>
