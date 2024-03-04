@@ -74,7 +74,9 @@ const Input: React.FC<InputPropTypes> = ({
         />
       </div>
       {fieldError && (
-        <div className="mt-2 text-red-500">{fieldError.message as string}</div>
+        <div className="fixed -mt-2 ml-2 text-rose-800 text-xs font-sans">
+          {fieldError.message as string}
+        </div>
       )}
     </React.Fragment>
   );

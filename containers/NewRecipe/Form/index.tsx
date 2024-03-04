@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { useEffect } from "react";
 import { useRouter } from "next/navigation";
 
 import { useForm, useFieldArray, FormProvider } from "react-hook-form";
@@ -24,7 +24,7 @@ const Form: React.FC<FormPropTypes> = () => {
   });
 
   const { handleSubmit, reset, control, watch } = useFormMethods;
-  const { fields, append } = useFieldArray<IRecipeFormType>({
+  const { fields, append, remove } = useFieldArray<IRecipeFormType>({
     control,
     name: "materials",
   });
@@ -72,13 +72,14 @@ const Form: React.FC<FormPropTypes> = () => {
             })}
           </div>
           <div className="flex flex-col w-2/3">
-            <div className="flex flex-row gap-4 items-center justify-center">
+            <div className="flex flex-row gap-4 mb-7 items-center justify-center">
               <div>
                 <FormComponents.Input
                   variant="primary"
                   name="title"
                   label="Recipe Title"
                   placeholder="(e.g. Spaghetti)"
+                  rules={{ required: "This field is required!" }}
                 />
               </div>
               <div>
@@ -87,6 +88,7 @@ const Form: React.FC<FormPropTypes> = () => {
                   name="cookingTime"
                   label="Cooking Time"
                   placeholder="(e.g. 30 minutes)"
+                  rules={{ required: "This field is required!" }}
                 />
               </div>
               <div>
@@ -95,6 +97,7 @@ const Form: React.FC<FormPropTypes> = () => {
                   name="cookingMethod"
                   label="Cooking Method"
                   placeholder="(e.g. Boil, Fry)"
+                  rules={{ required: "This field is required!" }}
                 />
               </div>
             </div>
@@ -113,15 +116,23 @@ const Form: React.FC<FormPropTypes> = () => {
             <div className="mb-10 pb-1 text-lg font-mono text-orange-900 underline decoration-double">
               {watchTitle}
             </div>
-            <div className="flex flex-col h-72 overflow-x-auto pr-9">
+            <div className="flex flex-col h-72 w-full overflow-x-auto pr-9">
               {fields.map((field, index) => {
                 return (
                   <div
-                    className="flex flex-row items-center gap-2 text-sm font-mono text-orange-700"
+                    className="flex flex-row items-center justify-between w-full gap-6 text-sm font-mono text-orange-700"
                     key={index}
                   >
-                    <Icons.Cutlery />
-                    {field.name}
+                    <div className="flex flex-row items-center w-full ">
+                      <Icons.Cutlery />
+                      {field.name}
+                    </div>
+                    <Icons.Delete
+                      onClick={() => {
+                        remove(index);
+                      }}
+                      className="w-6 h-6 cursor-pointer text-red-700 hover:text-red-500 "
+                    />
                   </div>
                 );
               })}
