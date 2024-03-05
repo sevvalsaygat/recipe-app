@@ -6,6 +6,7 @@ type UseRecipeStoreType = {
   recipes: RecipeType[];
   addRecipe: (data: IRecipeFormType) => void;
   deleteRecipe: (id: string) => void;
+  editRecipe: (id: string, data: IRecipeFormType) => void;
   getById: (id: string) => RecipeType | undefined;
 };
 
@@ -31,6 +32,12 @@ const useRecipeStore = create<UseRecipeStoreType>()(
         getById: (id) => {
           return get().recipes.find((recipe: RecipeType) => recipe.id === id);
         },
+        editRecipe: (id, data) =>
+          set((state) => ({
+            recipes: state.recipes.map((recipe) =>
+              recipe.id === id ? { ...recipe, ...data } : recipe
+            ),
+          })),
       }),
       {
         skipHydration: true,

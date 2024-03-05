@@ -66,7 +66,7 @@ const Input: React.FC<InputPropTypes> = ({
               type={type}
               placeholder={placeholder}
               className={cn(className, {
-                "w-full mb-4 bg-orange-100 bg-opacity-20 border border-orange-300 rounded-lg p-3 placeholder:text-xs font-light placeholder:text-zinc-500 focus:outline-none focus:ring-2 focus:ring-gray-350 focus:bg-white text-sm":
+                "w-full bg-orange-100 bg-opacity-20 border border-orange-300 rounded-lg p-3 placeholder:text-xs font-light placeholder:text-zinc-500 focus:outline-none focus:ring-2 focus:ring-gray-350 focus:bg-white text-sm":
                   variant === "primary",
               })}
             />
@@ -74,7 +74,7 @@ const Input: React.FC<InputPropTypes> = ({
         />
       </div>
       {fieldError && (
-        <div className="fixed -mt-2 ml-2 text-rose-800 text-xs font-sans">
+        <div className="fixed mt-2 ml-2 text-rose-800 text-xs font-sans">
           {fieldError.message as string}
         </div>
       )}
