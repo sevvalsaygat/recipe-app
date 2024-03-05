@@ -1,7 +1,7 @@
 "use client";
 
-import React from "react";
-import { useRouter } from "next/navigation";
+import React, { useEffect } from "react";
+import { useRouter, useSearchParams } from "next/navigation";
 
 import { useForm, useFieldArray, FormProvider } from "react-hook-form";
 
@@ -23,24 +23,43 @@ const Form: React.FC<FormPropTypes> = () => {
     },
   });
 
-  const { handleSubmit, reset, control, watch } = useFormMethods;
+  const searchParams = useSearchParams();
+  const { handleSubmit, reset, control, watch, setValue } = useFormMethods;
   const { fields, append, remove } = useFieldArray<IRecipeFormType>({
     control,
     name: "materials",
   });
 
-  const addRecipe = useRecipeStore((state) => state.addRecipe);
+  const { addRecipe, getById, editRecipe } = useRecipeStore((state) => state);
 
   const onSubmit = (data: IRecipeFormType) => {
-    try {
+    if (recipeId) {
+      editRecipe(recipeId, data);
+    } else {
       addRecipe(data);
-      reset();
-      ("Created successfully.");
-      router.push("/");
-    } catch (error) {
-      ("Something went wrong.");
     }
+    reset();
+    router.push("/");
   };
+  const recipeId = searchParams.get("recipeId");
+
+  useEffect(() => {
+    if (!recipeId) {
+      return;
+    }
+
+    const foundRecipe = getById(recipeId);
+    if (!foundRecipe) {
+      router.push("/");
+    }
+
+    setValue("title", foundRecipe?.title!);
+    setValue("cookingTime", foundRecipe?.cookingTime!);
+    setValue("cookingMethod", foundRecipe?.cookingMethod!);
+    foundRecipe?.materials.forEach((material) => {
+      append(material);
+    });
+  }, [recipeId, getById, router]);
 
   const watchTitle = watch("title");
   const watchCookingTime = watch("cookingTime");

@@ -4,6 +4,7 @@ import React from "react";
 
 import { useRecipeStore } from "@app/stores";
 import { Icons } from "@app/components";
+import Link from "next/link";
 
 type ListItemPropTypes = {
   recipe: RecipeType;
@@ -58,6 +59,9 @@ const ListItem: React.FC<ListItemPropTypes> = ({ recipe }) => {
       >
         <Icons.Delete />
       </button>
+      <div className="flex items-center justify-center mt-1 border text-xs font-mono text-orange-900 border-orange-900 hover:bg-orange-300 h-fit rounded-xl p-2">
+        <Link href={`/recipe/new?recipeId=${recipe.id}`}>Edit</Link>
+      </div>
     </div>
   );
 };
