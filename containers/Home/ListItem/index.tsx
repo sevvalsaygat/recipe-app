@@ -1,10 +1,10 @@
 "use client";
 
 import React from "react";
+import Link from "next/link";
 
 import { useRecipeStore } from "@app/stores";
 import { Icons } from "@app/components";
-import Link from "next/link";
 
 type ListItemPropTypes = {
   recipe: RecipeType;
@@ -43,6 +43,7 @@ const ListItem: React.FC<ListItemPropTypes> = ({ recipe }) => {
               <Icons.Food />
               <div className="font-mono text-sm text-orange-900">
                 {material.name}
+                (x{material.quantity})
               </div>
             </div>
           );

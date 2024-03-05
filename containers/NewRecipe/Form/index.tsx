@@ -28,11 +28,6 @@ const Form: React.FC<FormPropTypes> = () => {
   const { fields, append, remove, update } = useFieldArray<IRecipeFormType>({
     control,
     name: "materials",
-    // rules: {
-    //   validate: (value) => {
-    //     return value.length > 0;
-    //   },
-    // },
   });
 
   const { addRecipe, getById, editRecipe } = useRecipeStore((state) => state);
@@ -181,7 +176,7 @@ const Form: React.FC<FormPropTypes> = () => {
               >
                 <div className="flex flex-row items-center w-full ">
                   <Icons.Cutlery />
-                  {field.name} (x {field.quantity})
+                  {field.name} (x{field.quantity})
                 </div>
                 <Icons.Delete
                   onClick={() => {
