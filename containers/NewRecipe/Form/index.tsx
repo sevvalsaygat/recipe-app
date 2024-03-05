@@ -108,10 +108,10 @@ const Form: React.FC<FormPropTypes> = () => {
   };
 
   return (
-    <div className="w-full flex flex-row">
-      <div className="flex flex-col items-center w-2/3">
+    <div className="w-full container mx-auto flex flex-row gap-24 mt-24">
+      <div className="flex flex-col items-center w-2/3 gap-9">
         <FormProvider {...useFormMethods}>
-          <div className="food-bar-bg flex flex-col px-11 py-8 border overflow-auto w-3/4 h-80 my-20">
+          <div className="food-bar-bg flex flex-col px-11 py-8 border overflow-auto w-full h-80">
             {materialsData?.data.map((data, index) => {
               return (
                 <div
@@ -129,8 +129,8 @@ const Form: React.FC<FormPropTypes> = () => {
               );
             })}
           </div>
-          <div className="flex flex-col w-2/3">
-            <div className="flex flex-row gap-4 mb-7 items-center justify-center">
+          <div className="flex flex-col gap-9">
+            <div className="flex flex-row gap-4 items-center justify-center">
               <div>
                 <FormComponents.Input
                   variant="primary"
@@ -168,49 +168,45 @@ const Form: React.FC<FormPropTypes> = () => {
           </div>
         </FormProvider>
       </div>
-      <div className="flex flex-row w-1/3 mx-28 mt-16 bg-orange-50 rounded-2xl shadow-lg">
-        <div className="flex flex-col px-20 justify-between">
-          <div className="flex flex-col mt-7">
-            <div className="mb-10 pb-1 text-lg font-mono text-orange-900 underline decoration-double">
-              {watchTitle}
-            </div>
-            <div className="flex flex-col h-72 w-full overflow-x-auto pr-9">
-              {fields.map((field, index) => {
-                return (
-                  <div
-                    className="flex flex-row items-center justify-between w-full gap-6 text-sm font-mono text-orange-700"
-                    key={index}
-                  >
-                    <div className="flex flex-row items-center w-full ">
-                      <Icons.Cutlery />
-                      {field.name} (x {field.quantity})
-                    </div>
-                    <Icons.Delete
-                      onClick={() => {
-                        remove(index);
-                      }}
-                      className="w-6 h-6 cursor-pointer text-red-700 hover:text-red-500"
-                    />
-                    <button
-                      disabled={field.quantity === 1}
-                      onClick={() => {
-                        onClickDecreaseButton(field.name);
-                      }}
-                    >
-                      <Icons.MinusCircle className="w-7 h-7 cursor-pointer text-red-700 hover:text-red-500" />
-                    </button>
-                  </div>
-                );
-              })}
-            </div>
+      <div className="flex flex-col justify-between h-[50vh] w-1/3 bg-orange-50 rounded-2xl shadow-lg gap-8 p-10">
+        <div className="h-10 text-lg font-mono text-orange-900 underline decoration-double">
+          Title:{watchTitle}
+        </div>
+        <div className="flex flex-col h-full w-full overflow-y-auto border border-dashed border-yellow-900">
+          {fields.map((field, index) => {
+            return (
+              <div
+                className="flex flex-row items-center justify-between w-full gap-6 text-sm font-mono text-orange-700"
+                key={index}
+              >
+                <div className="flex flex-row items-center w-full ">
+                  <Icons.Cutlery />
+                  {field.name} (x {field.quantity})
+                </div>
+                <Icons.Delete
+                  onClick={() => {
+                    remove(index);
+                  }}
+                  className="w-6 h-6 cursor-pointer text-red-700 hover:text-red-500"
+                />
+                <button
+                  disabled={field.quantity === 1}
+                  onClick={() => {
+                    onClickDecreaseButton(field.name);
+                  }}
+                >
+                  <Icons.MinusCircle className="w-7 h-7 cursor-pointer text-red-700 hover:text-red-500" />
+                </button>
+              </div>
+            );
+          })}
+        </div>
+        <div className="flex flex-col h-16">
+          <div className="text-sm font-serif text-orange-700 underline">
+            Time:{watchCookingTime}
           </div>
-          <div className="flex flex-col mb-24">
-            <div className="text-sm font-serif text-orange-700 underline">
-              {watchCookingTime}
-            </div>
-            <div className="text-sm font-serif text-orange-700 underline">
-              {watchCookingMethod}
-            </div>
+          <div className="text-sm font-serif text-orange-700 underline">
+            Method:{watchCookingMethod}
           </div>
         </div>
       </div>

@@ -36,7 +36,7 @@ const ListItem: React.FC<ListItemPropTypes> = ({ recipe }) => {
           </div>
         </div>
       </div>
-      <div className="overflow-y-auto w-full h-4/5 px-10 py-3 pr-28 border border-dashed border-yellow-900 ">
+      <div className="overflow-y-auto w-full h-full px-10 py-3 pr-28 border border-dashed border-yellow-900 ">
         {recipe.materials.map((material, i) => {
           return (
             <div className="flex flex-row items-center gap-2 mb-1" key={i}>
