@@ -5,5 +5,15 @@ import Time from "./Time";
 import Cooking from "./Cooking";
 import Plus from "./Plus";
 import Cutlery from "./Cutlery";
+import MinusCircle from "./MinusCircle";
 
-export default { Delete, Food, Recipe, Time, Cooking, Plus, Cutlery };
+export default {
+  Delete,
+  Food,
+  Recipe,
+  Time,
+  Cooking,
+  Plus,
+  Cutlery,
+  MinusCircle,
+};

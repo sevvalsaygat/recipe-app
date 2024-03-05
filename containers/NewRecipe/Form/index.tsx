@@ -25,7 +25,7 @@ const Form: React.FC<FormPropTypes> = () => {
 
   const searchParams = useSearchParams();
   const { handleSubmit, reset, control, watch, setValue } = useFormMethods;
-  const { fields, append, remove } = useFieldArray<IRecipeFormType>({
+  const { fields, append, remove, update } = useFieldArray<IRecipeFormType>({
     control,
     name: "materials",
   });
@@ -56,14 +56,51 @@ const Form: React.FC<FormPropTypes> = () => {
     setValue("title", foundRecipe?.title!);
     setValue("cookingTime", foundRecipe?.cookingTime!);
     setValue("cookingMethod", foundRecipe?.cookingMethod!);
-    foundRecipe?.materials.forEach((material) => {
-      append(material);
-    });
+    setValue("materials", foundRecipe?.materials!);
   }, [recipeId, getById, router]);
 
   const watchTitle = watch("title");
   const watchCookingTime = watch("cookingTime");
   const watchCookingMethod = watch("cookingMethod");
+
+  const onClickAddButton = (name: string) => {
+    const foundMaterial = fields.find((material) => material.name === name);
+
+    if (foundMaterial) {
+      const foundMaterialIndex = fields.findIndex(
+        (material) => material === foundMaterial
+      );
+
+      update(foundMaterialIndex, {
+        ...foundMaterial,
+        quantity: foundMaterial.quantity + 1,
+      });
+
+      return;
+    }
+
+    append({
+      name: name,
+      quantity: 1,
+    });
+  };
+
+  const onClickDecreaseButton = (name: string) => {
+    const foundMaterial = fields.find((material) => material.name === name);
+
+    if (foundMaterial) {
+      const foundMaterialIndex = fields.findIndex(
+        (material) => material === foundMaterial
+      );
+
+      update(foundMaterialIndex, {
+        ...foundMaterial,
+        quantity: foundMaterial.quantity - 1,
+      });
+
+      return;
+    }
+  };
 
   return (
     <div className="w-full flex flex-row">
@@ -79,10 +116,7 @@ const Form: React.FC<FormPropTypes> = () => {
                   <div>{data.name}</div>
                   <Icons.Plus
                     onClick={() => {
-                      append({
-                        name: data.name,
-                        quantity: 1,
-                      });
+                      onClickAddButton(data.name);
                     }}
                     className="w-8 h-8 text-white mr-3 hover:text-gray-800"
                   />
@@ -144,14 +178,22 @@ const Form: React.FC<FormPropTypes> = () => {
                   >
                     <div className="flex flex-row items-center w-full ">
                       <Icons.Cutlery />
-                      {field.name}
+                      {field.name} (x {field.quantity})
                     </div>
                     <Icons.Delete
                       onClick={() => {
                         remove(index);
                       }}
-                      className="w-6 h-6 cursor-pointer text-red-700 hover:text-red-500 "
+                      className="w-6 h-6 cursor-pointer text-red-700 hover:text-red-500"
                     />
+                    <button
+                      disabled={field.quantity === 1}
+                      onClick={() => {
+                        onClickDecreaseButton(field.name);
+                      }}
+                    >
+                      <Icons.MinusCircle className="w-7 h-7 cursor-pointer text-red-700 hover:text-red-500" />
+                    </button>
                   </div>
                 );
               })}
