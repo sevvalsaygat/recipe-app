@@ -28,6 +28,11 @@ const Form: React.FC<FormPropTypes> = () => {
   const { fields, append, remove, update } = useFieldArray<IRecipeFormType>({
     control,
     name: "materials",
+    // rules: {
+    //   validate: (value) => {
+    //     return value.length > 0;
+    //   },
+    // },
   });
 
   const { addRecipe, getById, editRecipe } = useRecipeStore((state) => state);
