@@ -1,5 +1,10 @@
 import { NewRecipe } from "@app/containers";
+import { Suspense } from "react";
 
 export default function NewAdvert() {
-  return <NewRecipe.Form />;
+  return (
+    <Suspense>
+      <NewRecipe.Form />
+    </Suspense>
+  );
 }
